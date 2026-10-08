@@ -21,6 +21,13 @@ spec:
           image: ai-infra-api:v1
           ports:
             - containerPort: 8000
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1"
+              memory: "256Mi"
 --- 
 apiVersion: v1
 kind: Service

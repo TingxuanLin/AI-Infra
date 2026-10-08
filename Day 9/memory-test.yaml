@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-test
+spec:
+  restartPolicy: Always
+  containers:
+    - name: memory-test
+      image: python:3.12-slim
+      command:
+        - python
+        - -c
+        - |
+          import time
+          print("Allocating memory...", flush=True)
+          data = bytearray(256 * 1024 * 1024)
+          for i in range(0, len(data), 4096):
+              data[i] = 1
+          print("Allocation completed", flush=True)
+          time.sleep(3600)
+      resources:
+        requests:
+          memory: "64Mi"
+        limits:
+          memory: "128Mi"
